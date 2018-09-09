@@ -1,0 +1,26 @@
+{
+    "development": {
+        "username": "api_dev",
+        "password": "clxhtm&5298",
+        "database": "PAM_DEV",
+        "host": "13.125.246.193",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    },
+    "test": {
+        "username": "api_test",
+        "password": "clxhtm&5298",
+        "database": "PAM_TEST",
+        "host": "13.125.246.193",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    },
+    "production": {
+        "username": "api",
+        "password": "clxhtm&5298",
+        "database": "PAM",
+        "host": "13.125.246.193",
+        "dialect": "mysql",
+        "operatorsAliases": false
+    }
+}
