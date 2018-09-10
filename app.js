@@ -3,10 +3,24 @@
 require('dotenv').config();
 const SwaggerExpress = require('swagger-express-mw');
 const SwaggerUi = require('swagger-tools/middleware/swagger-ui');
+const cors = require('cors');
 const { sequelize } = require('./models');
 
 const app = require('express')();
 sequelize.sync({force:true});
+
+const corsOptions = {
+  credentials: true,
+  origin: function(origin, callback) {
+    if (origin === undefined) {
+      callback(null, false);
+    } else {
+      callback(null, true);
+    }
+  }
+}
+
+app.use(cors(corsOptions));
 
 module.exports = app; // for testing
 
