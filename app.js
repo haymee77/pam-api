@@ -1,12 +1,16 @@
 'use strict';
 
 require('dotenv').config();
-var SwaggerExpress = require('swagger-express-mw');
-var SwaggerUi = require('swagger-tools/middleware/swagger-ui');
-var app = require('express')();
+const SwaggerExpress = require('swagger-express-mw');
+const SwaggerUi = require('swagger-tools/middleware/swagger-ui');
+const { sequelize } = require('./models');
+
+const app = require('express')();
+sequelize.sync({force:true});
+
 module.exports = app; // for testing
 
-var config = {
+const config = {
   appRoot: __dirname // required config
 };
 
@@ -19,7 +23,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   // install middleware
   swaggerExpress.register(app);
 
-  var port = process.env.PORT || 10010;
+  const port = process.env.PORT || 10010;
   app.listen(port);
 
   if (swaggerExpress.runner.swagger.paths['/hello']) {

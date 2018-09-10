@@ -5,6 +5,10 @@ module.exports = (sequelize, Sequelize) => (
             allowNull: false,
             comment: 'Unique id'
         },
+        level: {
+            type: Sequelize.STRING(20),
+            allowNull: true,
+        }
     }, {
         charset: 'utf8',
         collate: 'utf8_unicode_ci',

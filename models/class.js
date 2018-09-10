@@ -1,10 +1,5 @@
 module.exports = (sequelize, Sequelize) => (
     sequelize.define('CLASSES_TB', {
-        uid: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            comment: 'Unique id'
-        },
         name: {
             type: Sequelize.STRING(45),
             allowNull: true,
@@ -12,7 +7,7 @@ module.exports = (sequelize, Sequelize) => (
         },
         capacity: {
             type: Sequelize.INTEGER,
-            allowNull: ture,
+            allowNull: true,
             comment: '수업 참가 가능 정원'
         },
         level: {
@@ -21,23 +16,24 @@ module.exports = (sequelize, Sequelize) => (
             comment: 'LEVEL_TB(group=user)의 code 값'
         },
         location: {
-            typw: Sequelize.STRING(200),
+            type: Sequelize.STRING(200),
             allowNull: true,
             comment: '수업 장소'
         },
         timetable: {
             type: Sequelize.JSON,
-            allowNull: ture,
+            allowNull: true,
             comment: '수업 시간표(key(요일):value(시간))'
         },
     }, {
         charset: 'utf8',
         collate: 'utf8_unicode_ci',
         freezeTableName: true,
-        crateAt: 'created_dt',
+        createdAt: 'created_dt',
         updatedAt: 'updated_dt',
         deletedAt: 'deleted_dt',
         timestamp: true,
         paranoid: true, // 삭제일(복구용))
+        underscored: true,  // (sanke_case) 컬럼명 convention
     })
 );

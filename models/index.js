@@ -10,15 +10,14 @@ const sequelize = new Sequelize(
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.Class = require('./class')(sequelize, Sequelize);
 db.Teacher = require('./teacher')(sequelize, Sequelize);
 db.User = require('./user')(sequelize, Sequelize);
+db.Class = require('./class')(sequelize, Sequelize);
 
 // DB 관계 정의(1:1)
-db.Teacher.belongsTo(db.User, {forignKey: 'user_uid'});
+db.Teacher.belongsTo(db.User, {foreignKey: 'user_id'});
 
 // DB 관계 정의(1:N)
-db.Teacher.hasMany(db.Class);
-db.Class.belongsTo(db.Teacher);
+db.Teacher.hasMany(db.Class, {as: 'techer', foreignKey: 'teacher_id'});
 
 module.exports = db;
