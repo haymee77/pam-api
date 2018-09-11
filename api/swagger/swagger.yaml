@@ -19,6 +19,35 @@ consumes:
 produces:
   - application/json
 paths:
+  /test:
+    x-swagger-router-controller: test
+    post:
+      description: API 테스트
+      operationId: test
+      parameters: [
+        {
+          name: 'name',
+          in: 'formData',
+          description: '이름',
+          required: true,
+          type: 'string'
+        }, {
+          name: 'age',
+          in: 'formData',
+          description: '나이',
+          required: true,
+          type: 'string'
+        }
+      ]
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/testPostResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /classes:
     x-swagger-router-controller: classes
     get:
@@ -112,6 +141,12 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  testPostResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
   ClassesGetResponse:
     type: object
   ClassesPostResponse:
