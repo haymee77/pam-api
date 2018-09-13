@@ -15,5 +15,5 @@ function postTest(req, res) {
     Test.create({
         name: name,
         age: age
-    }).then((test) => res.status(200).json(test));
+    }).then((test) => res.json(test));
 }

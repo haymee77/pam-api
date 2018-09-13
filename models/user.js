@@ -1,10 +1,5 @@
 module.exports = (sequelize, Sequelize) => (
     sequelize.define('USERS_TB', {
-        uid: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            comment: 'Unique id'
-        },
         name: {
             type: Sequelize.STRING(45),
             allowNull: true,
