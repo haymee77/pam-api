@@ -4,7 +4,8 @@ const util = require('util');
 const { Class } = require('../../models');
 
 module.exports = {
-    classes : getClasses, postClass
+    getClasses : getClasses,
+    postClass : postClass
 };
 
 function getClasses(req, res) {

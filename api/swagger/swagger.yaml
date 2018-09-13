@@ -15,35 +15,40 @@ schemes:
 consumes:
   - application/json
   - application/x-www-form-urlencoded
+  - application/octet-stream
 # format of the responses to the client (Accepts)
 produces:
   - application/json
 paths:
   /test:
+    # binds a127 app logic to a route
     x-swagger-router-controller: test
     post:
-      description: API 테스트
-      operationId: test
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: postTest
       parameters: [
         {
-          name: 'name',
-          in: 'formData',
-          description: '이름',
-          required: true,
-          type: 'string'
+          name: name,
+          in: formData,
+          description: 'name',
+          required: false,
+          type: string
         }, {
-          name: 'age',
-          in: 'formData',
-          description: '나이',
-          required: true,
-          type: 'string'
+          name: age,
+          in: formData,
+          description: 'age',
+          required: false,
+          type: string
         }
       ]
       responses:
         "200":
           description: Success
           schema:
+            # a pointer to a definition
             $ref: "#/definitions/testPostResponse"
+        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -142,11 +147,12 @@ paths:
 # complex objects have schema definitions
 definitions:
   testPostResponse:
-    required:
-      - message
+    type: object
     properties:
-      message:
+      name:
         type: string
+      age:
+        type: integer
   ClassesGetResponse:
     type: object
   ClassesPostResponse:

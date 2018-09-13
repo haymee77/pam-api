@@ -14,6 +14,9 @@ db.Teacher = require('./teacher')(sequelize, Sequelize);
 db.User = require('./user')(sequelize, Sequelize);
 db.Class = require('./class')(sequelize, Sequelize);
 
+// 테스트용 테이블
+db.Test = require('./test')(sequelize, Sequelize);
+
 // DB 관계 정의(1:1)
 db.Teacher.belongsTo(db.User, {foreignKey: 'user_id'});
 
