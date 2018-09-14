@@ -20,6 +20,42 @@ consumes:
 produces:
   - application/json
 paths:
+  /teachers:
+    x-swagger-router-controller: teachers
+    post:
+      summary: "Add a new teacher"
+      description: "Create teacher"
+      operationId: "createTeacher"
+      consumes:
+        - "application/json"
+        - "application/xml"
+        - "application/x-www-form-urlencoded"
+      produces:
+        - "application/json"
+        - "application/xml"
+        - "application/x-www-form-urlencoded"
+      parameters:
+        - name: "userId"
+          in: "formData"
+          description: "선생님이 가입한 아이디의 키값(USERS_TB참조)"
+          required: true
+          type: "integer"
+        - name: "levelId"
+          in: "formData"
+          description: "선생님 레벨의 키값(LEVEL_TB참조)"
+          required: false
+          type: "integer"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/TeacherPostResponse"
+        405:
+          description: "Invalid Input"
+        555:
+          description: "DB Insert Error"
+        default:
+          description: "Error"
   /users:
     x-swagger-router-controller: users
     post:
@@ -29,7 +65,7 @@ paths:
         {
           name: name,
           in: formData,
-          description: 'name(required)',
+          description: 'name',
           required: true,
           type: string
         }, {
@@ -211,6 +247,21 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  TeacherPostResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      id:
+        type: integer
+      user_id:
+        type: integer
+      level_id:
+        type: integer
+      updated_dt:
+        type: string
+      created_dt:
+        type: string
   UsersResponse:
     type: object
     properties:

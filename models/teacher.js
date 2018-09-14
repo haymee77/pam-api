@@ -1,12 +1,11 @@
 module.exports = (sequelize, Sequelize) => (
     sequelize.define('TEACHERS_TB', {
-        uid: {
-            type: Sequelize.UUID,
+        user_id: {
+            type: Sequelize.INTEGER,
             allowNull: false,
-            comment: 'Unique id'
         },
-        level: {
-            type: Sequelize.STRING(20),
+        level_id: {
+            type: Sequelize.INTEGER,
             allowNull: true,
         }
     }, {

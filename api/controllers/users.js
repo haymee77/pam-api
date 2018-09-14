@@ -19,10 +19,7 @@ function createUser(req, res) {
     const level = req.swagger.params.level.value || '';
     const snsProvider = req.swagger.params.snsProvider.value || '';
     const snsId = req.swagger.params.snsId.value || '';
-
-    if (snsId !== '') {
-        const snsConnectedDate = dateFormat(now);
-    }    
+    const snsConnectedDate = dateFormat(new Date());
 
     User.create({
         name: name,
@@ -33,12 +30,12 @@ function createUser(req, res) {
         level: level,
         sns_provider: snsProvider,
         sns_id: snsId,
-        sns_connect_dt: snsConnectedDate
+        sns_connect_dt: (snsId ? snsConnectedDate : null)
     }).then((user) => {
         result.success = true;
-
-        res.json(result);
+        result.user = user;
+        res.status(200).json(result);
+    }).catch((err) => {
+        res.status(500).json();
     });
-
-    res.json(result);
 }
