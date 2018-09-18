@@ -13,6 +13,7 @@ db.Sequelize = Sequelize;
 db.Teacher = require('./teacher')(sequelize, Sequelize);
 db.User = require('./user')(sequelize, Sequelize);
 db.Class = require('./class')(sequelize, Sequelize);
+db.Level = require('./level')(sequelize, Sequelize);
 
 // 테스트용 테이블
 db.Test = require('./test')(sequelize, Sequelize);
