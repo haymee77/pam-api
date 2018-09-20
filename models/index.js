@@ -24,4 +24,7 @@ db.Teacher.belongsTo(db.User, {foreignKey: 'user_id'});
 // DB 관계 정의(1:N)
 db.Teacher.hasMany(db.Class, {as: 'techer', foreignKey: 'teacher_id'});
 
+// HasOne 관계
+db.User.hasOne(db.Level, {as: 'level', foreignKey: 'level_id'});
+
 module.exports = db;

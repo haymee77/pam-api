@@ -1,5 +1,7 @@
-const setDefaultLevel = () => {
-    const { Level } = require('./models');
+function Init() {}
+
+Init.prototype.initLevelTB = function () {
+    const { Level } = require('../models');
     
     Level.bulkCreate([
         {code: 10000, group: 'USER', description: '사용자의 default 레벨'},
@@ -8,6 +10,6 @@ const setDefaultLevel = () => {
         {code: 40000, group: 'AUTH', description: '권한의 default 레벨'},
         {code: 50000, group: 'CLASS', description: '수업의 default 레벨'},
     ]);
-};
+}
 
-module.export = setDefaultLevel
+module.exports = new Init();

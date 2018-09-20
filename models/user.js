@@ -13,7 +13,8 @@ module.exports = (sequelize, Sequelize) => (
         email: {
             type: Sequelize.STRING(45),
             allowNull: true,
-            comment: '이메일'
+            comment: '이메일',
+            unique: true
         },
         mobile: {
             type: Sequelize.STRING(20),
@@ -25,10 +26,9 @@ module.exports = (sequelize, Sequelize) => (
             allowNull: true,
             comment: '별명'
         },
-        level: {
-            type: Sequelize.STRING(20),
+        level_id: {
+            type: Sequelize.INTEGER,
             allowNull: true,
-            comment: 'LEVEL_TB(group=user)의 code 값'
         },
         sns_provider: {
             type: Sequelize.STRING(45),

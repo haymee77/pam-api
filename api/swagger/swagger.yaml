@@ -18,28 +18,22 @@ consumes:
   - application/octet-stream
 # format of the responses to the client (Accepts)
 produces:
-  - application/json
+  - "application/json"
+  - "application/xml"
+  - "application/x-www-form-urlencoded"
 paths:
   /teachers:
     x-swagger-router-controller: teachers
     post:
-      summary: "Add a new teacher"
+      summary: "Add a new teacher(dev.need validation check)"
       description: "Create teacher"
       operationId: "createTeacher"
-      consumes:
-        - "application/json"
-        - "application/xml"
-        - "application/x-www-form-urlencoded"
-      produces:
-        - "application/json"
-        - "application/xml"
-        - "application/x-www-form-urlencoded"
       parameters:
-        - name: "userId"
+        - name: "email"
           in: "formData"
-          description: "선생님이 가입한 아이디의 키값(USERS_TB참조)"
+          description: "선생님이 가입한 아이디의 이메일 주소"
           required: true
-          type: "integer"
+          type: "string"
         - name: "levelId"
           in: "formData"
           description: "선생님 레벨의 키값(LEVEL_TB참조)"
@@ -59,44 +53,45 @@ paths:
   /users:
     x-swagger-router-controller: users
     post:
+      summary: "Add a new user(dev.need validation check)"
       description: Create user
       operationId: createUser
       parameters: [
         {
           name: name,
           in: formData,
-          description: 'name',
+          description: '이름',
           required: true,
           type: string
         }, {
           name: password,
           in: formData,
-          description: 'password',
+          description: '비밀번호',
           required: false,
           type: string
         }, {
           name: email,
           in: formData,
-          description: 'email',
+          description: '이메일',
           required: true,
           type: string
         }, {
           name: mobile,
           in: formData,
-          description: 'mobile(number only)',
+          description: '핸드폰번호(숫자만입력)',
           required: false,
           type: string
         }, {
           name: nick,
           in: formData,
-          description: 'nick',
+          description: '별명',
           required: false,
           type: string
         }, {
-          name: level,
+          name: levelId,
           in: formData,
-          description: 'level',
-          required: false,
+          description: 'LEVEL의 ID값',
+          required: true,
           type: string
         }, {
           name: snsProvider,
@@ -117,39 +112,10 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UsersResponse"
-        default:
-          description: Error
+        "409":
+          description: Conflict
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /test:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: test
-    post:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: postTest
-      parameters: [
-        {
-          name: name,
-          in: formData,
-          description: 'name',
-          required: false,
-          type: string
-        }, {
-          name: age,
-          in: formData,
-          description: 'age',
-          required: false,
-          type: string
-        }
-      ]
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/testPostResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -157,6 +123,7 @@ paths:
   /classes:
     x-swagger-router-controller: classes
     get:
+      summary: "Get a class or class list(dev.NOT YET)"
       description: 클래스 목록 요청
       operationId: getClasses
       responses:
@@ -169,6 +136,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
+      summary: "Add a new class(dev.NOT YET)"
       description: 클래스 생성
       operationId: postClass
       parameters: [
@@ -219,30 +187,6 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -252,37 +196,16 @@ definitions:
     properties:
       success:
         type: boolean
-      id:
-        type: integer
-      user_id:
-        type: integer
-      level_id:
-        type: integer
-      updated_dt:
-        type: string
-      created_dt:
-        type: string
   UsersResponse:
     type: object
     properties:
       success:
         type: boolean
-  testPostResponse:
-    type: object
-    properties:
-      name:
-        type: string
-      age:
+      userId:
         type: integer
   ClassesGetResponse:
     type: object
   ClassesPostResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-  HelloWorldResponse:
     required:
       - message
     properties:

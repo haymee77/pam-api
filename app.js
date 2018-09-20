@@ -5,20 +5,13 @@ const SwaggerExpress = require('swagger-express-mw');
 const SwaggerUi = require('swagger-tools/middleware/swagger-ui');
 const cors = require('cors');
 const { sequelize } = require('./models');
-// const setDefaultLevel = require('./test.js');
-
-const test = () => {
-  console.log('create middleware --');
-  next();
-};
+const { Level } = require('./models');
+const init = require('./common/test');
 
 const app = require('express')();
-sequelize.sync({force:true}).then(() => {
-  if (process.env.NODE_ENV == 'development') {
-    app.use(test);
-  }
 
-  app.use(test);
+sequelize.sync({force:true}).then(() => {
+  init.initLevelTB();
 });  
   
 const corsOptions = {
