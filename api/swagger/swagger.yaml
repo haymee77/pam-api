@@ -22,6 +22,21 @@ produces:
   - "application/xml"
   - "application/x-www-form-urlencoded"
 paths:
+  /level:
+    x-swagger-router-controller: levels
+    get:
+      summary: "Get level list"
+      description: "현재 등록된 모든 레벨을 보여줌"
+      operationId: getLevelList
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/LevelsGetResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /teachers:
     x-swagger-router-controller: teachers
     post:
@@ -191,6 +206,20 @@ paths:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
 definitions:
+  LevelsGetResponse:
+    type: object
+    properties:
+      groupName:
+        type: array
+        items:
+          type: object
+          properties:
+            code:
+              type: integer
+            group:
+              type: string
+            description:
+              type: string
   TeacherPostResponse:
     type: object
     properties:

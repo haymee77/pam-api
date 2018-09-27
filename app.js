@@ -10,7 +10,7 @@ const init = require('./common/test');
 
 const app = require('express')();
 
-sequelize.sync({force:true}).then(() => {
+sequelize.sync().then(() => {
   init.initLevelTB();
 });  
   
