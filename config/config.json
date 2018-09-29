@@ -19,7 +19,7 @@
         "username": "api",
         "password": "clxhtm&5298",
         "database": "PAM",
-        "host": "13.125.246.193",
+        "host": "localhost",
         "dialect": "mysql",
         "operatorsAliases": false
     }
