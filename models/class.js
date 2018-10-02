@@ -10,8 +10,8 @@ module.exports = (sequelize, Sequelize) => (
             allowNull: true,
             comment: '수업 참가 가능 정원'
         },
-        level: {
-            type: Sequelize.STRING(20),
+        level_id: {
+            type: Sequelize.INTEGER,
             allowNull: true,
             comment: 'LEVEL_TB(group=user)의 code 값'
         },

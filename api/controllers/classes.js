@@ -18,20 +18,20 @@ function getClasses(req, res) {
 function postClass(req, res) {
     const name = req.swagger.params.name.value || '';
     const capacity = req.swagger.params.capacity.value || '';
-    const level = req.swagger.params.level.value || '';
+    const levelId = req.swagger.params.levelId.value || '';
     const location = req.swagger.params.location.value || '';
     const timetable = req.swagger.params.timetable.value || '';
-    const teacher_id = req.swagger.params.teacher_id || '';
+    const teacherId = req.swagger.params.teacherId.value || '';
 
-    console.log(teacher_id);
+    console.log(req.swagger.params);
 
     Class.create({
         name: name,
         capacity: capacity,
-        level: level,
+        level_id: levelId,
         location: location,
         timetable: timetable,
-        teacher_id: teacher_id
+        teacher_id: teacherId
     }).then((new_class) => res.status(201).json(new_class))
     .catch((err) => console.error(err));    
 }

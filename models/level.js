@@ -1,9 +1,5 @@
 module.exports = (sequelize, Sequelize) => (
     sequelize.define('LEVEL_TB', {
-        code: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
         group: {
             type: Sequelize.ENUM('USER', 'CONTENTS', 'TEACHER', 'AUTH', 'CLASS'),
             allowNull: false,

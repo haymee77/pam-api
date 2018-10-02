@@ -151,8 +151,8 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
-      summary: "Add a new class(dev.NOT YET)"
-      description: 클래스 생성
+      summary: "Add a new class(작업중)"
+      description: 수업 클래스 생성
       operationId: postClass
       parameters: [
         {
@@ -168,9 +168,9 @@ paths:
           required: true,
           type: 'string',
         }, {
-          name: 'level',
+          name: 'levelId',
           in: 'formData',
-          description: '수업 레벨',
+          description: '수업 레벨(레벨TB 그룹 CLASS의 레벨 id값)',
           required: true,
           type: 'string',
         }, {
@@ -186,9 +186,9 @@ paths:
           required: true,
           type: 'string',
         }, {
-          name: 'teacher_id',
+          name: 'teacherId',
           in: 'formData',
-          description: '선생님 id',
+          description: '선생님TB의 id값',
           required: true,
           type: 'string',
         }

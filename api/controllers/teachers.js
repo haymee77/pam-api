@@ -17,23 +17,22 @@ function createTeacher(req, res) {
             console.log('없음');
         } else {
             console.log(user.dataValues.id);
+
+            Teacher.create({
+
+                user_id: user.dataValues.id,
+                level_id: req.swagger.params.levelId.value
+        
+            }).then((teacher) => {
+        
+                teacher.success = true;
+        
+                return res.json(teacher);
+            }).catch((err) => {
+                return res.status(555).json(false);
+            })
         }
 
         return res.status(200).json({success:true});
     });
-    /*
-    Teacher.create({
-
-        user_id: req.swagger.params.userId.value,
-        level_id: req.swagger.params.levelId.value
-
-    }).then((teacher) => {
-
-        teacher.success = true;
-
-        return res.json(teacher);
-    }).catch((err) => {
-        return res.status(555).json(false);
-    })
-    */
 }

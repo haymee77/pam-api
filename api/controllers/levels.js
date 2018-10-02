@@ -12,7 +12,7 @@ function getLevelList(req, res) {
         where: {
             deleted_dt: null
         },
-        attributes: ['code', 'group', 'description']
+        attributes: ['id', 'group', 'description']
     }).then(levelList => {
         const returnList = {};
 
