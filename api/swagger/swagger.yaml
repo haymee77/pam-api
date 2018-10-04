@@ -61,6 +61,10 @@ paths:
             $ref: "#/definitions/TeacherPostResponse"
         405:
           description: "Invalid Input"
+        409:
+          description: "Duplicated Error"
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         555:
           description: "DB Insert Error"
         default:
@@ -138,8 +142,8 @@ paths:
   /classes:
     x-swagger-router-controller: classes
     get:
-      summary: "Get a class or class list(dev.NOT YET)"
-      description: 클래스 목록 요청
+      summary: "Get class list"
+      description: 클래스 리스트(생성일 역순)
       operationId: getClasses
       responses:
         "200":
@@ -151,14 +155,14 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
     post:
-      summary: "Add a new class(작업중)"
+      summary: "Add a new class"
       description: 수업 클래스 생성
       operationId: postClass
       parameters: [
         {
           name: 'name',
           in: 'formData',
-          description: '클래스 이름',
+          description: '클래스 이름(중복 안됨)',
           required: true,
           type: 'string',
         }, {
@@ -234,12 +238,33 @@ definitions:
         type: integer
   ClassesGetResponse:
     type: object
-  ClassesPostResponse:
-    required:
-      - message
     properties:
-      message:
-        type: string
+      count:
+        type: integer
+      classList:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            capacity:
+              type: integer
+            levelId:
+              type: integer
+            location:
+              type: string
+            timetable:
+              type: object
+            teacher:
+              type: string
+  ClassesPostResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+      classId:
+        type: integer
   ErrorResponse:
     required:
       - message
